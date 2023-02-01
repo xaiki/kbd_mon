@@ -81,8 +81,6 @@ async fn device_loop(device: String, tx: Sender<i32>) {
 async fn main() {
     let args: Vec<String> = env::args().collect();
     let (tx, rx): (Sender<i32>, Receiver<i32>) = bounded(1);
-    task::block_on(async {
-        task::spawn(dbus_job(rx));
-        task::spawn(device_loop(args[1].clone(), tx)).await;
-    })
+    task::spawn(dbus_job(rx));
+    task::spawn(device_loop(args[1].clone(), tx)).await;
 }
