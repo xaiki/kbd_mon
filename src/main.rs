@@ -19,22 +19,12 @@ const LIGHT_STEPS: i32 = 50;
     default_path = "/org/freedesktop/UPower/KbdBacklight"
 )]
 trait KbdBacklight {
-    /// GetBrightness method
-    fn get_brightness(&self) -> zbus::Result<i32>;
-
-    /// GetMaxBrightness method
-    fn get_max_brightness(&self) -> zbus::Result<i32>;
-
     /// SetBrightness method
     fn set_brightness(&self, value: i32) -> zbus::Result<()>;
 
     /// BrightnessChanged signal
     #[dbus_proxy(signal)]
     fn brightness_changed(&self, value: i32) -> zbus::Result<()>;
-
-    /// BrightnessChangedWithSource signal
-    #[dbus_proxy(signal)]
-    fn brightness_changed_with_source(&self, value: i32, source: &str) -> zbus::Result<()>;
 }
 
 async fn dbus_job(rx: Receiver<i32>) -> Result<(), zbus::Error> {
