@@ -1,0 +1,16 @@
+#+title: kbd_mon simple deamon to handle your keyboard backlight
+
+This little tool has one job: turn my keyboard backlight off after a few
+moments, currently it depends on all hardset variables, but maybe in the future
+it's made nicer, patches are welcome.
+
+it does try to not hammer your dbus though, things might probably be better to have UPower do the animation (instead of flooding the bus with the interpolated light values)
+
+* instalation
+
+#+begin_src shell
+cargo build
+sudo target/debug/kbd_mon  /dev/input/by-path//${your keyboard device}
+#+end_src
+
+cheers
